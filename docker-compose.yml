@@ -39,8 +39,8 @@ services:
       - "80:80"
       - "443:443"
       - "8082:8082"
-    expose:
-      - 8080
+      # If you whant the trefik interface
+      # - "8080:8080"
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
