@@ -5,28 +5,22 @@ services:
     image: "traefik:latest"
     container_name: "traefik"
     command:
-      - --providers.docker=true
-      - --providers.docker.exposedbydefault=true
-      - --certificatesresolvers.letsencrypt.acme.dnschallenge=true
-      - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=ovh
-      - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=10
-      - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
-      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=ovh"
+      - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email=jturbeaux@pm.me"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
 
-      - --entrypoints.web.address=:80
-      - --entrypoints.web.http.redirections.entrypoint.to=websecure
-      - --entrypoints.web.http.redirections.entrypoint.scheme=https
-
-      - --entrypoints.websecure.address=:443
-      - --entrypoints.websecure.http.tls=true
-      - --entrypoints.websecure.http.tls.certResolver=letsencrypt
-
-      - --entrypoints.websecure.http.tls.domains[0].main=tibillet.org
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.tibillet.org
     ports:
       - "80:80"
       - "443:443"
-    #  - "8080:8080"
+      - "8080:8080"
     environment:
       - "OVH_ENDPOINT=ovh-eu" # ou "ovh-ca"
       - "OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}"
@@ -36,10 +30,12 @@ services:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
-    networks:
-      - frontend
 
-networks:
-  frontend:
-    external: true
-
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.tibillet.org`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
