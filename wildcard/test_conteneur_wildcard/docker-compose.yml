@@ -9,18 +9,12 @@ services:
       - traefik.enable=true
       - traefik.docker.network=frontend
 
+      - traefik.http.routers.test_machine.rule=Host(`test.tibillet.org`)
+      - traefik.http.routers.test_machine.entrypoints=websecure
+
       - traefik.http.routers.test_machine.tls.certresolver=myresolver
-      - traefik.http.routers.test_machine.rule=Host(`test.tibillet.re`)
-      # - traefik.http.routers.test_machine.rule=Host(`test.tibillet.re``,`test2.tibillet.re``,`test3.tibillet.re``)
-      # - traefik.http.routers.test_machine.rule=HostRegexp(`test.tibillet.re`,`test2.tibillet.re`, `{subdomain:[a-z]+}.nasjo.fr`)
       - traefik.http.services.test_machine.loadbalancer.server.port=8884
 
     networks:
       - frontend
     command: "python3 -m http.server 8884"
-
-networks:
-  frontend:
-    external: true
-
-
