@@ -36,4 +36,10 @@ services:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external: true
 
