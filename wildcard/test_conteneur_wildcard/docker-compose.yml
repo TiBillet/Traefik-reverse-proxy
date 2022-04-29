@@ -1,18 +1,17 @@
 
 version: "3.7"
 services:
-  test_machine:
-    image: python:3.7-slim
-    ports:
-      - 8884:8884
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
     labels:
-      - traefik.enable=true
-      - traefik.docker.network=frontend
-      - traefik.http.routers.website.rule=Host(`test.tibillet.org`)
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.tibillet.org`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
 
     networks:
       - frontend
-    command: "python3 -m http.server 8884"
 
 networks:
   frontend:
