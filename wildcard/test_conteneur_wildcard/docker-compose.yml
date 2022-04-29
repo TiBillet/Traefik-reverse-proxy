@@ -8,12 +8,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=frontend
-
-      - traefik.http.routers.test_machine.rule=Host(`test.tibillet.org`)
-      - traefik.http.routers.test_machine.entrypoints=websecure
-
-      - traefik.http.routers.test_machine.tls.certresolver=myresolver
-      - traefik.http.services.test_machine.loadbalancer.server.port=8884
+      - traefik.http.routers.website.rule=Host(`nick.maietta.org`)
 
     networks:
       - frontend
