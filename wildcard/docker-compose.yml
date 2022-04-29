@@ -9,10 +9,9 @@ services:
       - --providers.docker.exposedbydefault=true
       - --certificatesresolvers.letsencrypt.acme.dnschallenge=true
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=ovh
-      - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=60
+      - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=10
       - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
-      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
