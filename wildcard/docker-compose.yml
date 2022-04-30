@@ -22,7 +22,7 @@ services:
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=60
       - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
-      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+#      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
       - --entrypoints.websecure.http.tls.domains[0].main=tibillet.org
       - --entrypoints.websecure.http.tls.domains[0].sans=*.tibillet.org
