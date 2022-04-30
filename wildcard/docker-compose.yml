@@ -8,22 +8,28 @@ services:
       - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
+
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
+
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.certResolver=letsencrypt
+
       - --certificatesresolvers.letsencrypt.acme.dnschallenge=true
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=ovh
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=60
       - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+#      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+
       - --entrypoints.websecure.http.tls.domains[0].main=tibillet.org
       - --entrypoints.websecure.http.tls.domains[0].sans=*.tibillet.org
     ports:
       - "80:80"
       - "443:443"
+#      - "8080:8080"
     environment:
       - "OVH_ENDPOINT=ovh-eu" # ou "ovh-ca"
       - "OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}"
@@ -33,23 +39,12 @@ services:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
+    networks:
+      - frontend
 
-
-  whoami:
-    image: "traefik/whoami"
-    container_name: "simple-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=HostRegexp(`{sub:[a-zA-Z0-9-]+}.tibillet.org`)"
-      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
-
-
-#    networks:
-#      - frontend
-#
-#networks:
-#  frontend:
-#    external: true
+networks:
+  frontend:
+    external: true
 
 
 #
