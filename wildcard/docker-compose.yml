@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   traefik:
-    image: "traefik:chevrotin"
+    image: "traefik:vacherin"
     container_name: "traefik_wild"
     restart: always
     command:
