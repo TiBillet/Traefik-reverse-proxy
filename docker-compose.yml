@@ -1,8 +1,8 @@
 version: '3.7'
 services:
   traefik:
-    image: "traefik:chevrotin"
-    container_name: "traefik"
+    image: "traefik:vacherin"
+    container_name: "traefik_wild"
     hostname: "traefik"
     command:
       - "--log.level=DEBUG"
