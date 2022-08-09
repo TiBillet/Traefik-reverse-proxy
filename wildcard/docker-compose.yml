@@ -42,11 +42,13 @@ services:
 
     networks:
       - frontend
+      - frontend_raff
 
 networks:
   frontend:
     external: true
-
+  frontend_raff:
+    external: true
 
 #
 #  whoami:
