@@ -41,4 +41,10 @@ https://eu.api.ovh.com/1.0/auth/credential  -d '{
 
 - Copiez le consumer_key et le rentrer dans le .env
 - Valider la requete avec le lien envoyé dans la réponse. Pensez à mettre unlimited dans les droits car Traefik renouvelle le widlcard tout les trois mois.
-- Lancez le compose et testez avec un whoami ( cf fichier compose )
+- Effacez ( backupez ) le fichier acme.json dans le dossier letsencrypt monté par compose.
+
+- Lancez un conteneur whoami avec un dns fixe ex :
+  - "traefik.http.routers.whoami.rule=Host(`whoami.betabillet.tech`)"
+
+- Lancez le compose et testez avec un whoami regex
+  - "traefik.http.routers.whoami.rule=HostRegexp(`{sub:[a-zA-Z0-9-]+}.betabillet.tech`)"
