@@ -25,8 +25,8 @@ services:
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
 #      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
-      - --entrypoints.websecure.http.tls.domains[0].main=tibillet.org
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.tibillet.org
+      - --entrypoints.websecure.http.tls.domains[0].main=betabillet.tech
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.betabillet.tech
     ports:
       - "80:80"
       - "443:443"
@@ -54,6 +54,6 @@ networks:
 #    container_name: "simple-service"
 #    labels:
 #      - "traefik.enable=true"
-#      - "traefik.http.routers.whoami.rule=Host(`whoami.tibillet.org`)"
+#      - "traefik.http.routers.whoami.rule=Host(`whoami.betabillet.tech`)"
 #      - "traefik.http.routers.whoami.entrypoints=websecure"
 #      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
