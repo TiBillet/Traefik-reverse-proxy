@@ -25,12 +25,15 @@ services:
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=60
       - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
-      # - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+
+      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
       - --certificatesresolvers.tlsresolver.acme.tlschallenge=true
       - --certificatesresolvers.tlsresolver.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.tlsresolver.acme.storage=/tlsresolver/acme.json
       - --certificatesresolvers.tlsresolver.acme.httpchallenge.entrypoint=web
+
+      - --certificatesresolvers.tlsresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
     ports:
       - "80:80"
