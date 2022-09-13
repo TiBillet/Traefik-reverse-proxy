@@ -8,10 +8,10 @@ services:
       - traefik.enable=true
       - traefik.docker.network=frontend
       - traefik.http.routers.whoami.tls.certresolver=letsencrypt
-      - traefik.http.routers.whoami.tls.domains[0].main=betabillet.tech
-      - traefik.http.routers.whoami.tls.domains[0].sans=*.betabillet.tech
+      - traefik.http.routers.whoami.tls.domains[0].main=tibillet.re
+      - traefik.http.routers.whoami.tls.domains[0].sans=*.tibillet.re
 
-      - traefik.http.routers.whoami.rule=HostRegexp(`{sub:[a-zA-Z0-9-]+}.betabillet.tech`) || Host(`betabillet.tech`)
+      - traefik.http.routers.whoami.rule=HostRegexp(`{sub:[a-zA-Z0-9-]+}.tibillet.re`) || Host(`tibillet.re`)
       - traefik.http.routers.whoami.entrypoints=websecure
 
     networks:
