@@ -23,9 +23,9 @@ services:
       - --certificatesresolvers.letsencrypt.acme.dnschallenge=true
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=ovh
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.delayBeforeCheck=60
+      - --certificatesResolvers.letsencrypt.acme.dnsChallenge.resolvers=1.1.1.1:53,8.8.8.8:53
       - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
-
 #      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
       - --certificatesresolvers.tlsresolver.acme.tlschallenge=true
