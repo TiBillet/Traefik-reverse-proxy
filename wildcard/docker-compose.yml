@@ -17,8 +17,8 @@ services:
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.certResolver=letsencrypt
-      - --entrypoints.websecure.http.tls.domains[0].main=betabillet.tech
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.betabillet.tech
+      - --entrypoints.websecure.http.tls.domains[0].main=tibillet.re
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.tibillet.re
 
       - --certificatesresolvers.letsencrypt.acme.dnschallenge=true
       - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=ovh
@@ -63,6 +63,6 @@ networks:
 #    container_name: "simple-service"
 #    labels:
 #      - "traefik.enable=true"
-#      - "traefik.http.routers.whoami.rule=Host(`whoami.betabillet.tech`)"
+#      - "traefik.http.routers.whoami.rule=Host(`whoami.tibillet.re`)"
 #      - "traefik.http.routers.whoami.entrypoints=websecure"
 #      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
