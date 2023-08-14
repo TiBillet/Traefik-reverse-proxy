@@ -36,6 +36,14 @@ services:
 
       - --certificatesresolvers.tlsresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
+      # Même chose avec myresolver a la place de tlsresolver pour la retro compatibilité avec les anciens certificats
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+      - --certificatesresolvers.myresolver.acme.email=jturbeaux@pm.me
+      - --certificatesresolvers.myresolver.acme.storage=/myresolver/acme.json
+      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+
+      - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+
     ports:
       - "80:80"
       - "443:443"
