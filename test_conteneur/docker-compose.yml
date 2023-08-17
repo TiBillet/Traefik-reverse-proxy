@@ -6,7 +6,7 @@ services:
       - traefik.enable=true
       - traefik.docker.network=frontend
       - traefik.http.routers.test_machine.tls.certresolver=myresolver
-      - traefik.http.routers.test_machine.rule=Host(`test.$DOMAIN`)
+      - traefik.http.routers.test_machine.rule=Host(`test.$DOMAIN`) || Host(`test2.$DOMAIN`) || Host(`test3.$DOMAIN`)
     networks:
       - frontend
 
