@@ -27,7 +27,7 @@ services:
       - --certificatesresolvers.letsencrypt.acme.email=jturbeaux@pm.me
       - --certificatesresolvers.letsencrypt.acme.storage=/dnschallenge/acme.json
 
-      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+#      - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
 #
 #      # Pour utiliser le challenge tls en même temps que le challenge dns
