@@ -29,20 +29,22 @@ services:
 
       - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
-      - --certificatesresolvers.tlsresolver.acme.tlschallenge=true
-      - --certificatesresolvers.tlsresolver.acme.email=jturbeaux@pm.me
-      - --certificatesresolvers.tlsresolver.acme.storage=/tlsresolver/acme.json
-      - --certificatesresolvers.tlsresolver.acme.httpchallenge.entrypoint=web
-
-      - --certificatesresolvers.tlsresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
-
-      # Même chose avec myresolver a la place de tlsresolver pour la retro compatibilité avec les anciens certificats
-      - --certificatesresolvers.myresolver.acme.tlschallenge=true
-      - --certificatesresolvers.myresolver.acme.email=jturbeaux@pm.me
-      - --certificatesresolvers.myresolver.acme.storage=/myresolver/acme.json
-      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
-
-      - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+#
+#      # Pour utiliser le challenge tls en même temps que le challenge dns
+#      - --certificatesresolvers.tlsresolver.acme.tlschallenge=true
+#      - --certificatesresolvers.tlsresolver.acme.email=jturbeaux@pm.me
+#      - --certificatesresolvers.tlsresolver.acme.storage=/tlsresolver/acme.json
+#      - --certificatesresolvers.tlsresolver.acme.httpchallenge.entrypoint=web
+#
+#      - --certificatesresolvers.tlsresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+#
+#      # Même chose avec myresolver a la place de tlsresolver pour la retro compatibilité avec les anciens certificats
+#      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+#      - --certificatesresolvers.myresolver.acme.email=jturbeaux@pm.me
+#      - --certificatesresolvers.myresolver.acme.storage=/myresolver/acme.json
+#      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+#
+#      - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
     ports:
       - "80:80"
