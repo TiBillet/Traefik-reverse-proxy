@@ -1,0 +1,23 @@
+
+version: "3.7"
+services:
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=frontend
+      - traefik.http.routers.whoami.tls.certresolver=letsencrypt
+      - traefik.http.routers.whoami.tls.domains[0].main=tibillet.coop
+      - traefik.http.routers.whoami.tls.domains[0].sans=*.tibillet.coop
+
+      - traefik.http.routers.whoami.rule=HostRegexp(`{sub:[a-zA-Z0-9-]+}.tibillet.coop`) || Host(`tibillet.coop`)
+      - traefik.http.routers.whoami.entrypoints=websecure
+
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external: true
+
