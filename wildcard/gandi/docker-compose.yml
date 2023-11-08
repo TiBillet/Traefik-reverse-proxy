@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   traefik:
-    image: "traefik:vacherin"
+    image: "traefik:saintmarcelin"
     container_name: "traefik_wild"
     restart: always
     command:
@@ -53,8 +53,9 @@ services:
     environment:
       - "GANDI_API_KEY=${GANDI_API_KEY}"
     volumes:
-      - "./letsencrypt:/letsencrypt"
-      - "./tlsresolver:/tlsresolver"
+      - "./dnschallenge:/dnschallenge"
+#      - "./letsencrypt:/letsencrypt"
+#      - "./tlsresolver:/tlsresolver"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
     networks:
