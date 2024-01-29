@@ -1,0 +1,68 @@
+version: '3.7'
+services:
+  traefik:
+    image: "traefik:mimolette"
+    container_name: "traefik"
+    hostname: "traefik"
+    command:
+      - "--log.level=INFO"
+      - "--providers.docker=true"
+      - "--providers.docker.network=frontend"
+      - "--providers.docker.exposedbydefault=true"
+
+      - "--entrypoints.entrypoints-https.address=:443"
+      - "--entrypoints.entrypoints-http.address=:80"
+      - "--entrypoints.entrypoints-http.http.redirections.entryPoint.to=entrypoints-https"
+      - "--entrypoints.entrypoints-http.http.redirections.entryPoint.scheme=https"
+
+
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=jturbeaux@pm.me"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=entrypoints-http"
+
+      # Dashboard 
+      # - '--api=true'
+      # - '--api.dashboard=true'
+      # - '--api.insecure=true'
+      # pour metrics avec prometheus et grafana : ( https://medium.com/platform-engineering/monitoring-traefik-with-grafana-1d037af5b952 )
+      # - '--entryPoints.metrics.address=:8082'
+      # - '--providers.providersThrottleDuration=2s'
+      # - '--accessLog.bufferingSize=0'
+      # - '--ping.entryPoint=entrypoints-http'
+      # - '--metrics.prometheus=true'
+      # - '--metrics.prometheus.addEntryPointsLabels=true'
+      # - '--metrics.prometheus.addServicesLabels=true'
+      # - '--metrics.prometheus.manualrouting=true'
+    ports:
+      - "80:80"
+      - "443:443"
+      # - "8082:8082"
+      # If you whant the trefik interface
+      # - "8080:8080"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    restart: always
+    networks:
+      - frontend
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tags=public"
+      - "traefik.docker.network=frontend"
+      # générer le mot de passe avec htpasswd -Bbn traefik CHANGEME > htpasswd
+      # attention, doubler ensuite les $, sinon compose sera en erreur car il croiera a des variables ...
+      # https://github.com/DeviaVir/zenbot/issues/2663
+      # - "traefik.http.middlewares.my-basic-auth.basicauth.users=traefik:$$2y$$05$$i0BZIhdB5d3E/1TFZiF4CuZu.HGz0KYWIBJ1ngtlsnsZJG/YiwIWy"
+      # - "traefik.http.services.prometheus.loadbalancer.server.port=8082"
+      # - "traefik.http.routers.prometheus.rule=PathPrefix(`/metrics`)"
+      # - "traefik.http.routers.prometheus.service=prometheus@internal"
+      # - "traefik.http.routers.prometheus.entrypoints=metrics"
+      # - "traefik.http.routers.prometheus.middlewares=my-basic-auth"
+
+
+networks:
+  frontend:
+    external: true
+
