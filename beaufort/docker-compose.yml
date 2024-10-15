@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   traefik:
     image: "traefik:beaufort"
@@ -25,9 +24,9 @@ services:
       # - '--entryPoints.metrics.address=:8082'
       # - '--providers.providersThrottleDuration=2s'
       # - '--accessLog.bufferingSize=0'
-      - '--api=true'
-      - '--api.dashboard=true'
-      - '--api.insecure=true'
+      # - '--api=true'
+      # - '--api.dashboard=true'
+      # - '--api.insecure=true'
       # - '--ping.entryPoint=entrypoints-http'
       # - '--metrics.prometheus=true'
       # - '--metrics.prometheus.addEntryPointsLabels=true'
@@ -36,9 +35,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8082:8082"
+      # - "8082:8082"
       # If you whant the trefik interface
-      - "8083:8080"
+      # - "8083:8080"
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
